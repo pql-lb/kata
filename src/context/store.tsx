@@ -30,6 +30,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
         case actionTypes.UPDATE_PRICES:
             return { ...state, prices: action.payload };
         case actionTypes.UPDATE_CART:
+            console.log("here");
             const newCart = [...state.cart, action.payload];
             return { ...state, cart: newCart };
         default: {
