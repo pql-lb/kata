@@ -30,8 +30,20 @@ const reducer: Reducer<State, Action> = (state, action) => {
         case actionTypes.UPDATE_PRICES:
             return { ...state, prices: action.payload };
         case actionTypes.UPDATE_CART:
-            console.log("here");
-            const newCart = [...state.cart, action.payload];
+            const existingProductIndex = state.cart.findIndex(
+                (item) => item.id === action.payload.id
+            );
+
+            if (existingProductIndex !== -1) {
+                const updatedCart = state.cart.map((item, index) =>
+                    index === existingProductIndex
+                        ? { ...item, count: item.count + 1 }
+                        : item
+                );
+                return { ...state, cart: updatedCart };
+            }
+
+            const newCart = [...state.cart, { ...action.payload, count: 1 }];
             return { ...state, cart: newCart };
         default: {
             return state;
