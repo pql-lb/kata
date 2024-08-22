@@ -6,17 +6,26 @@ import React, {
     Dispatch,
     ReactNode,
 } from "react";
+import { Structure } from "../components/types/main";
 
-const initialState = {};
-interface State {}
+const initialState = {
+    prices: [],
+};
+interface State {
+    prices: Structure[];
+}
 
 interface Action {
     type: string;
     payload?: any;
 }
-export const actionTypes = {};
+export const actionTypes = {
+    UPDATE_PRICES: "UPDATE_PRICES",
+};
 const reducer: Reducer<State, Action> = (state, action) => {
     switch (action.type) {
+        case actionTypes.UPDATE_PRICES:
+            return { ...state, prices: action.payload };
         default: {
             return state;
         }
@@ -24,7 +33,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
 };
 
 export const ContextContext = createContext<State>({
-    state: { ...initialState },
+    ...initialState,
 });
 export const ContextDispatchContext = createContext<Dispatch<Action> | null>(
     null
