@@ -5,13 +5,13 @@ import { CartItem } from "../molecules/CartItem";
 
 const CartComponent = React.memo(({}: {}) => {
     const { cart } = useContext(Context);
-    console.log(cart);
+
     return cart.length ? (
-        <>
+        <div data-testid="cart">
             {cart.map((item) => {
                 return <CartItem item={item} key={item.id} />;
             })}
-        </>
+        </div>
     ) : null;
 });
 export default CartComponent;

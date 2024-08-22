@@ -1,9 +1,11 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { DispatchContext, actionTypes } from "../context/store";
-import { Structure } from "../types/main";
+import { Cart, Structure } from "../types/main";
 import { Product } from "../components/molecules/Product";
-import { MockProvider, mockDispatch } from "./setupTests";
+import { MockProvider, mockDispatch, state, state2 } from "./setupTests";
+import { MainTemplate } from "../components/templates/Main";
+import CartComponent from "../components/organisms/Cart";
 
 const mockProduct: Structure = {
     id: "1",
@@ -21,7 +23,7 @@ describe("Product Component", () => {
 
     test("renders the product name and id correctly", () => {
         render(
-            <MockProvider>
+            <MockProvider state={state}>
                 <Product product={mockProduct} index={0} />
             </MockProvider>
         );
@@ -32,7 +34,7 @@ describe("Product Component", () => {
 
     test("calls dispatch with the correct action on button click", () => {
         render(
-            <MockProvider>
+            <MockProvider state={state}>
                 <Product product={mockProduct} index={0} />
             </MockProvider>
         );
@@ -43,5 +45,29 @@ describe("Product Component", () => {
             type: actionTypes.UPDATE_CART,
             payload: mockProduct,
         });
+    });
+
+    test("renders all cart items correctly", async () => {
+        const { rerender } = render(
+            <MockProvider state={state}>
+                <Product product={mockProduct} index={0} />
+                <CartComponent />
+            </MockProvider>
+        );
+        fireEvent.click(screen.getByText("Add to Cart"));
+        fireEvent.click(screen.getByText("Add to Cart"));
+        fireEvent.click(screen.getByText("Add to Cart"));
+
+        expect(mockDispatch).toHaveBeenCalledTimes(3);
+
+        rerender(
+            <MockProvider state={state2}>
+                <Product product={mockProduct} index={0} />
+                <CartComponent />
+            </MockProvider>
+        );
+        const quantity = screen.getByTestId("quantity");
+        expect(quantity).toBeInTheDocument();
+        expect(quantity).toHaveTextContent("3");
     });
 });
