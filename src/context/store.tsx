@@ -13,11 +13,13 @@ const initialState = {
     prices: [],
     cart: [],
     total: 0,
+    final: 0,
 };
 export interface State {
     prices: Structure[];
     cart: Cart[];
     total: Number;
+    final: Number;
 }
 
 export interface Action {
@@ -28,14 +30,21 @@ export const actionTypes = {
     UPDATE_PRICES: "UPDATE_PRICES",
     UPDATE_CART: "UPDATE_CART",
     RUNNING_TOTAL: "RUNNING_TOTAL",
+    FINAL_TOTAL: "FINAL_TOTAL",
+    REPLACE_CART: "REPLACE_CART",
 };
 const reducer: Reducer<State, Action> = (state, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_PRICES:
             return { ...state, prices: action.payload };
+        case actionTypes.FINAL_TOTAL:
+            const final = calculateTotal(action.payload);
+            return { ...state, final };
         case actionTypes.RUNNING_TOTAL:
             const total = calculateTotal(state.cart);
             return { ...state, total };
+        case actionTypes.REPLACE_CART:
+            return { ...state, cart: action.payload };
         case actionTypes.UPDATE_CART:
             const existingProductIndex = state.cart.findIndex(
                 (item) => item.id === action.payload.id

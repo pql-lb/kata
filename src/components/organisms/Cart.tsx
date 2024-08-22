@@ -23,7 +23,7 @@ const CartComponent = React.memo(({}: {}) => {
     const dispatch = useContext(DispatchContext) as Dispatch<Action>;
     useEffect(() => {
         startTransition(() => {
-            console.log("here");
+            // console.log("here");
             dispatch({ type: actionTypes.RUNNING_TOTAL, payload: "" });
         });
     }, [cart, dispatch]);

@@ -20,7 +20,7 @@ export const FetchData = (date?: Number) => {
                     ? `${CLOUDFRONT_URL}/data.json?cache-bust=${date}`
                     : `${CLOUDFRONT_URL}/data.json`;
                 const response = await fetch(url);
-                console.log(url);
+
                 if (!response.ok) {
                     throw new Error(
                         `Failed to fetch from CloudFront: ${response.statusText}`
@@ -28,7 +28,6 @@ export const FetchData = (date?: Number) => {
                 }
                 const result: JSON = await response.json();
                 if (result && result.items && dispatch) {
-                    console.log(result);
                     setData(result.items);
                     dispatch({
                         type: actionTypes.UPDATE_PRICES,
