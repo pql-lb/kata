@@ -7,28 +7,33 @@ import React, {
     ReactNode,
 } from "react";
 import { Cart, Structure } from "../types/main";
+import { calculateTotal } from "../utils/main";
 
 const initialState = {
     prices: [],
     cart: [],
 };
-interface State {
+export interface State {
     prices: Structure[];
     cart: Cart[];
 }
 
-interface Action {
+export interface Action {
     type: string;
     payload?: any;
 }
 export const actionTypes = {
     UPDATE_PRICES: "UPDATE_PRICES",
     UPDATE_CART: "UPDATE_CART",
+    RUNNING_TOTAL: "RUNNING_TOTAL",
 };
 const reducer: Reducer<State, Action> = (state, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_PRICES:
             return { ...state, prices: action.payload };
+        case actionTypes.RUNNING_TOTAL:
+            calculateTotal(state.cart);
+            return { ...state };
         case actionTypes.UPDATE_CART:
             const existingProductIndex = state.cart.findIndex(
                 (item) => item.id === action.payload.id
