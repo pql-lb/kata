@@ -6,13 +6,15 @@ import React, {
     Dispatch,
     ReactNode,
 } from "react";
-import { Structure } from "../components/types/main";
+import { Cart, Structure } from "../components/types/main";
 
 const initialState = {
     prices: [],
+    cart: [],
 };
 interface State {
     prices: Structure[];
+    cart: Cart[];
 }
 
 interface Action {
@@ -21,11 +23,15 @@ interface Action {
 }
 export const actionTypes = {
     UPDATE_PRICES: "UPDATE_PRICES",
+    UPDATE_CART: "UPDATE_CART",
 };
 const reducer: Reducer<State, Action> = (state, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_PRICES:
             return { ...state, prices: action.payload };
+        case actionTypes.UPDATE_CART:
+            const newCart = [...state.cart, action.payload];
+            return { ...state, cart: newCart };
         default: {
             return state;
         }

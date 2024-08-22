@@ -9,3 +9,6 @@ export interface Structure {
         price: number;
     };
 }
+export interface Cart extends Structure {
+    count: number;
+}
