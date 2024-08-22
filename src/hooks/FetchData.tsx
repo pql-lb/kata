@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { DispatchContext, actionTypes } from "../context/store";
-import { JSON, Structure } from "../components/types/main";
+import { JSON, Structure } from "../types/main";
 
 // const BUCKET_NAME = "kata987";
 // const REGION = "us-west-2";

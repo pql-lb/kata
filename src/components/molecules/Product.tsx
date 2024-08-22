@@ -1,5 +1,5 @@
 import React, { useCallback, useContext } from "react";
-import { Structure } from "../types/main";
+import { Structure } from "../../types/main";
 import { DispatchContext, actionTypes } from "../../context/store";
 import { Button } from "../atoms/Button";
 

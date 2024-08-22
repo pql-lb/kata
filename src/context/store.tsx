@@ -6,7 +6,7 @@ import React, {
     Dispatch,
     ReactNode,
 } from "react";
-import { Cart, Structure } from "../components/types/main";
+import { Cart, Structure } from "../types/main";
 
 const initialState = {
     prices: [],

@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from "react";
 import { Context } from "../../context/store";
-import { Structure } from "../types/main";
+import { Structure } from "../../types/main";
 import { Product } from "../molecules/Product";
 
 const List = React.memo(() => {
