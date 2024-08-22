@@ -3,7 +3,7 @@ import { Suspense, lazy } from "react";
 import { Loader } from "./components/molecules/Loader";
 import ErrorBoundary from "./components/molecules/Error";
 const NotFound = lazy(() => import("./components/pages/NotFound"));
-const Products = lazy(() => import("./components/pages/products"));
+const Products = lazy(() => import("./components/pages/Products"));
 
 function App() {
     return (
