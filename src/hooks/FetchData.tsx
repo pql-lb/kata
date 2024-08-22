@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ContextDispatchContext, actionTypes } from "../context/store";
+import { DispatchContext, actionTypes } from "../context/store";
 import { JSON, Structure } from "../components/types/main";
 
 // const BUCKET_NAME = "kata987";
@@ -7,7 +7,7 @@ import { JSON, Structure } from "../components/types/main";
 const CLOUDFRONT_URL = "https://dg4fo0dwgiaqb.cloudfront.net";
 
 export const FetchData = () => {
-    const dispatch = useContext(ContextDispatchContext);
+    const dispatch = useContext(DispatchContext);
     const [data, setData] = useState<Structure[] | undefined>(undefined);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | undefined>(undefined);

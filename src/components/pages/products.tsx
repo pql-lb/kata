@@ -1,10 +1,11 @@
-import React from "react";
+import React, { lazy } from "react";
 import { FetchData } from "../../hooks/FetchData";
+const List = lazy(() => import("../organisms/List"));
 
 const Products = React.memo(() => {
-    FetchData();
+    const { data } = FetchData();
 
-    return <div>Products</div>;
+    return data ? <List /> : null;
 });
 
 export default Products;

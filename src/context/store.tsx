@@ -32,12 +32,10 @@ const reducer: Reducer<State, Action> = (state, action) => {
     }
 };
 
-export const ContextContext = createContext<State>({
+export const Context = createContext<State>({
     ...initialState,
 });
-export const ContextDispatchContext = createContext<Dispatch<Action> | null>(
-    null
-);
+export const DispatchContext = createContext<Dispatch<Action> | null>(null);
 
 export const ContextProvider: React.FC<{ children: ReactNode }> = ({
     children,
@@ -47,10 +45,10 @@ export const ContextProvider: React.FC<{ children: ReactNode }> = ({
     useEffect(() => {}, [dispatch]);
 
     return (
-        <ContextContext.Provider value={state}>
-            <ContextDispatchContext.Provider value={dispatch}>
+        <Context.Provider value={state}>
+            <DispatchContext.Provider value={dispatch}>
                 <div>{children}</div>
-            </ContextDispatchContext.Provider>
-        </ContextContext.Provider>
+            </DispatchContext.Provider>
+        </Context.Provider>
     );
 };
