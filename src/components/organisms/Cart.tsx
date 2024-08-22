@@ -9,7 +9,7 @@ import { Cart } from "../../types/main";
 import { CartItem } from "../molecules/CartItem";
 
 const CartComponent = React.memo(({}: {}) => {
-    const { cart } = useContext(Context);
+    const { cart, total } = useContext(Context);
     const dispatch = useContext(DispatchContext) as Dispatch<Action>;
     useEffect(() => {
         startTransition(() => {
@@ -17,11 +17,15 @@ const CartComponent = React.memo(({}: {}) => {
             dispatch({ type: actionTypes.RUNNING_TOTAL, payload: "" });
         });
     }, [cart, dispatch]);
+
     return cart.length ? (
         <div data-testid="cart">
             {cart.map((item) => {
                 return <CartItem item={item} key={item.id} />;
             })}
+            <div>
+                Running Total: <p data-testid="total">{String(total)}</p>
+            </div>
         </div>
     ) : null;
 });

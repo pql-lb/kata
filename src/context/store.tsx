@@ -12,10 +12,12 @@ import { calculateTotal } from "../utils/main";
 const initialState = {
     prices: [],
     cart: [],
+    total: 0,
 };
 export interface State {
     prices: Structure[];
     cart: Cart[];
+    total: Number;
 }
 
 export interface Action {
@@ -32,8 +34,8 @@ const reducer: Reducer<State, Action> = (state, action) => {
         case actionTypes.UPDATE_PRICES:
             return { ...state, prices: action.payload };
         case actionTypes.RUNNING_TOTAL:
-            calculateTotal(state.cart);
-            return { ...state };
+            const total = calculateTotal(state.cart);
+            return { ...state, total };
         case actionTypes.UPDATE_CART:
             const existingProductIndex = state.cart.findIndex(
                 (item) => item.id === action.payload.id
