@@ -1,22 +1,14 @@
-import React, {
-    Dispatch,
-    useCallback,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
-import { FetchData } from "../../hooks/FetchData";
-import { Button } from "../atoms/Button";
+import { Dispatch, useContext, useEffect } from "react";
 import {
     Action,
     Context,
     DispatchContext,
     actionTypes,
-} from "../../context/store";
-import { Cart, Structure } from "../../types/main";
+} from "../context/store";
+import { Structure } from "../types/main";
+import { FetchData } from "./FetchData";
 
-export const Checkout = React.memo(() => {
-    //refetch prices
+export const CalculateTotal = () => {
     const { total, final, cart } = useContext(Context);
     const dispatch = useContext(DispatchContext) as Dispatch<Action>;
     const { data } = FetchData(Date.now());
@@ -44,6 +36,5 @@ export const Checkout = React.memo(() => {
             dispatch({ type: actionTypes.FINAL_TOTAL, payload: updatedCart });
         }
     }, [data]);
-    //when final has value redirect to checkout
-    return <div>{final && <div>Final Total: {String(final)}</div>}</div>;
-});
+    return data;
+};

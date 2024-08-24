@@ -14,13 +14,17 @@ import {
 } from "../../context/store";
 import { Cart } from "../../types/main";
 import { CartItem } from "../molecules/CartItem";
-import { Checkout } from "./Checkout";
+import { FinalTotal } from "./FinalTotal";
 import { Button } from "../atoms/Button";
+import { useLocation } from "react-router-dom";
 
 const CartComponent = React.memo(({}: {}) => {
     const { cart, total } = useContext(Context);
     const [checkout, setCheckout] = useState(false);
     const dispatch = useContext(DispatchContext) as Dispatch<Action>;
+    const location = useLocation();
+    const isCheckoutPage = location.pathname === "/checkout-page";
+
     useEffect(() => {
         startTransition(() => {
             dispatch({ type: actionTypes.RUNNING_TOTAL, payload: "" });
@@ -38,8 +42,10 @@ const CartComponent = React.memo(({}: {}) => {
             <div>
                 Running Total: <p data-testid="total">{String(total)}</p>
             </div>
-            <Button string="Checkout" handleClick={handleClick} />
-            {checkout && <Checkout />}
+            {!isCheckoutPage && (
+                <Button string="Checkout" handleClick={handleClick} />
+            )}
+            {checkout && <FinalTotal />}
         </div>
     ) : null;
 });

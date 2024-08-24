@@ -33,6 +33,7 @@ export const actionTypes = {
     FINAL_TOTAL: "FINAL_TOTAL",
     REPLACE_CART: "REPLACE_CART",
     RELOAD_CART: "RELOAD_CART",
+    REMOVE_ITEM: "REMOVE_ITEM",
 };
 const reducer: Reducer<State, Action> = (state, action) => {
     switch (action.type) {
@@ -70,6 +71,12 @@ const reducer: Reducer<State, Action> = (state, action) => {
             const newCart = [...state.cart, { ...action.payload, count: 1 }];
             localStorage.setItem("cart", JSON.stringify(newCart));
             return { ...state, cart: newCart };
+        case actionTypes.REMOVE_ITEM:
+            const updatedCart = state.cart.filter(
+                (item) => String(item.id) !== action.payload
+            );
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+            return { ...state, cart: updatedCart };
         default: {
             return state;
         }
