@@ -18,8 +18,8 @@ const initialState = {
 export interface State {
     prices: Structure[];
     cart: Cart[];
-    total: Number;
-    final: Number;
+    total: number;
+    final: number;
 }
 
 export interface Action {

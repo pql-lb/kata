@@ -1,25 +1,13 @@
-import React, {
-    Dispatch,
-    useCallback,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
-import { FetchData } from "../../hooks/FetchData";
-import { Button } from "../atoms/Button";
-import {
-    Action,
-    Context,
-    DispatchContext,
-    actionTypes,
-} from "../../context/store";
-import { Cart, Structure } from "../../types/main";
+import React, { useContext, useEffect, useState } from "react";
+import { Action, Context } from "../../context/store";
 import { useNavigate } from "react-router-dom";
 import { CalculateTotal } from "../../hooks/CalculateTotal";
+import { formatPrice } from "../../utils/main";
+import { PriceDisplay } from "../molecules/PriceDisplay";
 
 export const FinalTotal = React.memo(() => {
     const navigate = useNavigate();
-    const { total, final, cart } = useContext(Context);
+    const { final } = useContext(Context);
     CalculateTotal();
     useEffect(() => {
         //when final has value redirect to checkout
@@ -28,5 +16,5 @@ export const FinalTotal = React.memo(() => {
         }
     }, [final, navigate]);
 
-    return <div>{final && <div>Final Total: {String(final)}</div>}</div>;
+    return <>{final && <PriceDisplay final={final} />}</>;
 });

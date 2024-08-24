@@ -11,14 +11,19 @@ export const CartItem = React.memo(({ item }: { item: Cart }) => {
         }
     }, [dispatch]);
     return (
-        <div>
-            cart item: {item.id}{" "}
-            <div>
+        <div className="cart__item">
+            {" "}
+            <Button
+                className="cart__delete"
+                string="X"
+                handleClick={handleClick}
+            />
+            <h2 className="cart__title">cart item: {item.id}</h2>
+            <div className="cart__amount">
                 <p>
                     Quantity: <span data-testid="quantity">{item.count}</span>
                 </p>
             </div>
-            <Button string="X" handleClick={handleClick} />
         </div>
     );
 });

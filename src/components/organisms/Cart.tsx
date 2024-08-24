@@ -17,6 +17,7 @@ import { CartItem } from "../molecules/CartItem";
 import { FinalTotal } from "./FinalTotal";
 import { Button } from "../atoms/Button";
 import { useLocation } from "react-router-dom";
+import { formatPrice } from "../../utils/main";
 
 const CartComponent = React.memo(({}: {}) => {
     const { cart, total } = useContext(Context);
@@ -35,17 +36,23 @@ const CartComponent = React.memo(({}: {}) => {
     }, []);
 
     return cart.length ? (
-        <div data-testid="cart">
+        <div className="cart" data-testid="cart">
             {cart.map((item) => {
                 return <CartItem item={item} key={item.id} />;
             })}
-            <div>
-                Running Total: <p data-testid="total">{String(total)}</p>
+            <div className="cart__subtotal">
+                <p>
+                    Running Total:{" "}
+                    <span data-testid="total">{formatPrice(total)}</span>
+                </p>
             </div>
             {!isCheckoutPage && (
-                <Button string="Checkout" handleClick={handleClick} />
+                <Button
+                    string="Checkout"
+                    className="cart__checkout"
+                    handleClick={handleClick}
+                />
             )}
-            {checkout && <FinalTotal />}
         </div>
     ) : null;
 });

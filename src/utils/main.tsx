@@ -17,3 +17,13 @@ export const calculateTotal = (cart: Cart[]): any => {
     });
     return total;
 };
+export const formatPrice = (
+    amount: number,
+    locale = "en-UK",
+    currency = "GBP"
+) => {
+    return new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: currency,
+    }).format(amount);
+};
