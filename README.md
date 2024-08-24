@@ -10,3 +10,5 @@ For the cart I am using local storage so that the cart persists on page refresh.
 For payment processing I would use Stripe to handle actual payments. I would use Payment elements to allow for a customizable checkout experience.
 
 With more time I would also implement better styling and animations with gsap.
+
+For a larger list of products I would have used windowing to display data.
