@@ -32,6 +32,7 @@ export const actionTypes = {
     RUNNING_TOTAL: "RUNNING_TOTAL",
     FINAL_TOTAL: "FINAL_TOTAL",
     REPLACE_CART: "REPLACE_CART",
+    RELOAD_CART: "RELOAD_CART",
 };
 const reducer: Reducer<State, Action> = (state, action) => {
     switch (action.type) {
@@ -43,7 +44,14 @@ const reducer: Reducer<State, Action> = (state, action) => {
         case actionTypes.RUNNING_TOTAL:
             const total = calculateTotal(state.cart);
             return { ...state, total };
+        case actionTypes.RELOAD_CART:
+            const json = action.payload;
+            return {
+                ...state,
+                cart: json ? JSON.parse(json) : [],
+            };
         case actionTypes.REPLACE_CART:
+            localStorage.setItem("cart", JSON.stringify(action.payload));
             return { ...state, cart: action.payload };
         case actionTypes.UPDATE_CART:
             const existingProductIndex = state.cart.findIndex(
@@ -60,6 +68,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
             }
 
             const newCart = [...state.cart, { ...action.payload, count: 1 }];
+            localStorage.setItem("cart", JSON.stringify(newCart));
             return { ...state, cart: newCart };
         default: {
             return state;
@@ -77,7 +86,10 @@ export const ContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    useEffect(() => {}, [dispatch]);
+    useEffect(() => {
+        const cartStorage = localStorage.getItem("cart");
+        dispatch({ payload: cartStorage, type: actionTypes.RELOAD_CART });
+    }, [dispatch]);
 
     return (
         <Context.Provider value={state}>
