@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import { formatPrice } from "../../utils/main";
+import { Context } from "../../context/store";
 
 export const PriceDisplay = React.memo(({ final }: { final: number }) => {
+    const { cart, discounts_applied } = useContext(Context);
     return (
-        <div className="cart__total">
-            <p>
-                Final Price: <span>{formatPrice(final)}</span>
-            </p>
+        <div className="wrapper">
+            <div>
+                {cart.map((item) => {
+                    console.log(item);
+                    return (
+                        <div className="summary">
+                            <p className="summary__title">{item.id}</p>
+                            <p className="summary__quantity">
+                                Number of items: {item.count}
+                            </p>
+                            {item.discountedPrice ? (
+                                <p className="summary__price--discount">
+                                    <span>
+                                        {" "}
+                                        {formatPrice(
+                                            item.unitPrice * item.count
+                                        )}{" "}
+                                    </span>
+                                    {formatPrice(item.discountedPrice)}
+                                </p>
+                            ) : (
+                                <p className="summary__price">
+                                    {formatPrice(item.unitPrice * item.count)}
+                                </p>
+                            )}
+                        </div>
+                    );
+                })}
+            </div>
+            <div className="cart__total">
+                <p>
+                    Final Price: <span>{formatPrice(final)}</span>
+                </p>
+            </div>
         </div>
     );
 });

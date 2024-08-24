@@ -14,12 +14,14 @@ const initialState = {
     cart: [],
     total: 0,
     final: 0,
+    discounts_applied: [],
 };
 export interface State {
     prices: Structure[];
     cart: Cart[];
     total: number;
     final: number;
+    discounts_applied: any;
 }
 
 export interface Action {
@@ -34,6 +36,7 @@ export const actionTypes = {
     REPLACE_CART: "REPLACE_CART",
     RELOAD_CART: "RELOAD_CART",
     REMOVE_ITEM: "REMOVE_ITEM",
+    DISCOUNT_APPLIED: "DISCOUNT_APPLIED",
 };
 const reducer: Reducer<State, Action> = (state, action) => {
     switch (action.type) {
@@ -41,10 +44,16 @@ const reducer: Reducer<State, Action> = (state, action) => {
             return { ...state, prices: action.payload };
         case actionTypes.FINAL_TOTAL:
             const final = calculateTotal(action.payload);
-            return { ...state, final };
+            const discounts = state.cart.filter(
+                (item) => item.specialPrice !== null
+            );
+            return { ...state, final, discounts_applied: discounts };
         case actionTypes.RUNNING_TOTAL:
             const total = calculateTotal(state.cart);
-            return { ...state, total };
+            const discounts2 = state.cart.filter(
+                (item) => item.specialPrice !== null
+            );
+            return { ...state, total, discounts_applied: discounts2 };
         case actionTypes.RELOAD_CART:
             const json = action.payload;
             return {
@@ -77,6 +86,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
             );
             localStorage.setItem("cart", JSON.stringify(updatedCart));
             return { ...state, cart: updatedCart };
+
         default: {
             return state;
         }

@@ -7,7 +7,7 @@ type Props = {
     product: Structure;
     index: number;
 };
-const names = ["Apples", "Oranges", "Bananas", "Lemons"];
+
 export const Product = React.memo(({ product, index }: Props) => {
     const { id } = product;
     const dispatch = useContext(DispatchContext);
@@ -18,9 +18,8 @@ export const Product = React.memo(({ product, index }: Props) => {
     }, [dispatch]);
     return (
         <>
-            <div>
-                <p>{names[index]}</p>
-                <p>{id}</p>
+            <div className="product">
+                <p className="product__title">{id}</p>
                 <Button string="Add to Cart" handleClick={handleClick} />
             </div>
         </>

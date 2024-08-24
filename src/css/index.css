@@ -12,6 +12,12 @@ code {
         monospace;
 }
 
+.wrapper {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
 .button {
     padding: 0.25rem 0.5rem;
     border: none;
@@ -56,4 +62,15 @@ code {
     font-size: 18px;
     width: 100%;
     text-align: center;
+}
+
+.summary {
+    border-bottom: 1px solid grey;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    position: relative;
+    width: 60%;
+}
+.summary__price--discount span {
+    text-decoration: line-through;
 }

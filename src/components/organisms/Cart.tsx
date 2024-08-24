@@ -53,6 +53,7 @@ const CartComponent = React.memo(({}: {}) => {
                     handleClick={handleClick}
                 />
             )}
+            {checkout && <FinalTotal />}
         </div>
     ) : null;
 });

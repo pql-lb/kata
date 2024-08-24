@@ -9,6 +9,8 @@ export const calculateTotal = (cart: Cart[]): any => {
             const { quantity, price } = specialPrice;
             const discounted = Math.floor(count / specialPrice.quantity);
             const leftOver = count % quantity;
+            item.discounted = discounted;
+            item.discountedPrice = discounted * price + leftOver * unitPrice;
             total += discounted * price;
             total += leftOver * unitPrice;
         } else {

@@ -15,4 +15,6 @@ export interface Structure {
 }
 export interface Cart extends Structure {
     count: number;
+    discounted?: number;
+    discountedPrice?: number;
 }
