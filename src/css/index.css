@@ -38,6 +38,8 @@ code {
     top: 0;
     width: 320px;
     padding: 2rem 1rem;
+    background: white;
+    z-index: 10;
 }
 .cart__item {
     border-bottom: 1px solid grey;
@@ -55,8 +57,16 @@ code {
 .cart__amount {
 }
 .cart__subtotal {
+    font-size: 1.2rem;
+    font-weight: 400;
 }
 .cart__total {
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.cart__subtotal span,
+.cart__total span {
+    font-weight: 600;
 }
 .cart__checkout {
     font-size: 18px;
@@ -73,4 +83,21 @@ code {
 }
 .summary__price--discount span {
     text-decoration: line-through;
+}
+
+.products {
+    padding: 2rem 0;
+}
+.product {
+    border-bottom: 1px solid grey;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    position: relative;
+    width: 60%;
+}
+.product__title {
+}
+
+.checkout {
+    padding: 2rem 0;
 }

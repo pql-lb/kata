@@ -16,5 +16,5 @@ export const FinalTotal = React.memo(() => {
         }
     }, [final, navigate]);
 
-    return <>{final && <PriceDisplay final={final} />}</>;
+    return <></>;
 });

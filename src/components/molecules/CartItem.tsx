@@ -18,7 +18,7 @@ export const CartItem = React.memo(({ item }: { item: Cart }) => {
                 string="X"
                 handleClick={handleClick}
             />
-            <h2 className="cart__title">cart item: {item.id}</h2>
+            <h2 className="cart__title">{item.id}</h2>
             <div className="cart__amount">
                 <p>
                     Quantity: <span data-testid="quantity">{item.count}</span>

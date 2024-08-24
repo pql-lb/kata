@@ -19,7 +19,7 @@ export const Product = React.memo(({ product, index }: Props) => {
     return (
         <>
             <div className="product">
-                <p className="product__title">{id}</p>
+                <h2 className="product__title">{id}</h2>
                 <Button string="Add to Cart" handleClick={handleClick} />
             </div>
         </>

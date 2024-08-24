@@ -7,7 +7,7 @@ const List = React.memo(() => {
     const { prices } = useContext(Context);
 
     return prices ? (
-        <div className="wrapper">
+        <div className="wrapper products">
             {prices.map((item: Structure, index) => {
                 return <Product key={item.id} product={item} index={index} />;
             })}

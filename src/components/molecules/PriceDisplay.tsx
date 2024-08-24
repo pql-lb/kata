@@ -5,13 +5,12 @@ import { Context } from "../../context/store";
 export const PriceDisplay = React.memo(({ final }: { final: number }) => {
     const { cart, discounts_applied } = useContext(Context);
     return (
-        <div className="wrapper">
+        <div className="wrapper checkout">
             <div>
                 {cart.map((item) => {
-                    console.log(item);
                     return (
                         <div className="summary">
-                            <p className="summary__title">{item.id}</p>
+                            <h2 className="summary__title">{item.id}</h2>
                             <p className="summary__quantity">
                                 Number of items: {item.count}
                             </p>
