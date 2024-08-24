@@ -9,7 +9,7 @@ export const PriceDisplay = React.memo(({ final }: { final: number }) => {
             <div>
                 {cart.map((item) => {
                     return (
-                        <div className="summary">
+                        <div key={"summary" + item.id} className="summary">
                             <h2 className="summary__title">{item.id}</h2>
                             <p className="summary__quantity">
                                 Number of items: {item.count}
