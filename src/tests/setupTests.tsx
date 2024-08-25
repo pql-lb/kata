@@ -69,6 +69,13 @@ export const MockProvider: React.FC<{ children: ReactNode; state: any }> = ({
     );
 };
 
+jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useLocation: () => ({
+        pathname: "/test-route",
+    }),
+}));
+
 afterEach(() => {
     jest.clearAllMocks();
 });
