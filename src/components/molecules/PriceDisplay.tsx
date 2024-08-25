@@ -3,7 +3,7 @@ import { formatPrice } from "../../utils/main";
 import { Context } from "../../context/store";
 
 export const PriceDisplay = React.memo(({ final }: { final: number }) => {
-    const { cart, discounts_applied } = useContext(Context);
+    const { cart } = useContext(Context);
     return (
         <div className="wrapper checkout">
             <div>

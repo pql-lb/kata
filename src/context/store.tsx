@@ -14,14 +14,12 @@ const initialState = {
     cart: [],
     total: 0,
     final: 0,
-    discounts_applied: [],
 };
 export interface State {
     prices: Structure[];
     cart: Cart[];
     total: number;
     final: number;
-    discounts_applied: any;
 }
 
 export interface Action {
@@ -36,7 +34,6 @@ export const actionTypes = {
     REPLACE_CART: "REPLACE_CART",
     RELOAD_CART: "RELOAD_CART",
     REMOVE_ITEM: "REMOVE_ITEM",
-    DISCOUNT_APPLIED: "DISCOUNT_APPLIED",
 };
 const reducer: Reducer<State, Action> = (state, action) => {
     switch (action.type) {
@@ -44,16 +41,12 @@ const reducer: Reducer<State, Action> = (state, action) => {
             return { ...state, prices: action.payload };
         case actionTypes.FINAL_TOTAL:
             const final = calculateTotal(action.payload);
-            const discounts = state.cart.filter(
-                (item) => item.specialPrice !== null
-            );
-            return { ...state, final, discounts_applied: discounts };
+
+            return { ...state, final };
         case actionTypes.RUNNING_TOTAL:
             const total = calculateTotal(state.cart);
-            const discounts2 = state.cart.filter(
-                (item) => item.specialPrice !== null
-            );
-            return { ...state, total, discounts_applied: discounts2 };
+
+            return { ...state, total };
         case actionTypes.RELOAD_CART:
             const json = action.payload;
             return {
