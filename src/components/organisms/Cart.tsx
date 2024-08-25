@@ -38,26 +38,34 @@ const CartComponent = React.memo(({}: {}) => {
         setCheckout(true);
     }, []);
 
-    return cart.length ? (
+    return (
         <div className="cart" data-testid="cart">
-            {cart.map((item) => {
-                return <CartItem item={item} key={item.id} />;
-            })}
-            <div className="cart__subtotal">
-                <p>
-                    Running Total:{" "}
-                    <span data-testid="total">{formatPrice(total)}</span>
-                </p>
-            </div>
-            {!isCheckoutPage && (
-                <Button
-                    string="Checkout"
-                    className="cart__checkout"
-                    handleClick={handleClick}
-                />
+            {cart.length ? (
+                <>
+                    {cart.map((item) => {
+                        return <CartItem item={item} key={item.id} />;
+                    })}
+                    <div className="cart__subtotal">
+                        <p>
+                            Running Total:{" "}
+                            <span data-testid="total">
+                                {formatPrice(total)}
+                            </span>
+                        </p>
+                    </div>
+                    {!isCheckoutPage && (
+                        <Button
+                            string="Checkout"
+                            className="cart__checkout"
+                            handleClick={handleClick}
+                        />
+                    )}
+                    {checkout && <FinalTotal />}
+                </>
+            ) : (
+                <p>Cart Empty..</p>
             )}
-            {checkout && <FinalTotal />}
         </div>
-    ) : null;
+    );
 });
 export default CartComponent;

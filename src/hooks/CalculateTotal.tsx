@@ -16,10 +16,13 @@ export const CalculateTotal = (callback: (isComplete: boolean) => void) => {
 
     useEffect(() => {
         if (data && data.length) {
-            const updatedPrices: Record<string, Structure> = {};
-            data.forEach((item: Structure) => {
-                updatedPrices[item.id] = item;
-            });
+            const updatedPrices = data.reduce<Record<string, Structure>>(
+                (acc, item) => {
+                    acc[item.id] = item;
+                    return acc;
+                },
+                {}
+            );
 
             const updatedCart = cart.map((cartItem) => {
                 const latestPrice = updatedPrices[cartItem.id];
