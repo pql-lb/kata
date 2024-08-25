@@ -17,12 +17,14 @@ export const PriceDisplay = React.memo(({ final }: { final: number }) => {
                             {item.discountedPrice ? (
                                 <p className="summary__price--discount">
                                     Item Total:{" "}
-                                    <span>
-                                        {" "}
-                                        {formatPrice(
-                                            item.unitPrice * item.count
-                                        )}{" "}
-                                    </span>
+                                    {item.discounted ? (
+                                        <span>
+                                            {" "}
+                                            {formatPrice(
+                                                item.unitPrice * item.count
+                                            )}{" "}
+                                        </span>
+                                    ) : null}
                                     {formatPrice(item.discountedPrice)}
                                 </p>
                             ) : (

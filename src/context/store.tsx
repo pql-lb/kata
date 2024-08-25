@@ -40,7 +40,10 @@ const reducer: Reducer<State, Action> = (state, action) => {
         case actionTypes.UPDATE_PRICES:
             return { ...state, prices: action.payload };
         case actionTypes.FINAL_TOTAL:
-            const final = calculateTotal(state.cart, action.payload);
+            const final = calculateTotal(
+                action.payload.cart,
+                action.payload.boolean
+            );
 
             return { ...state, final };
         case actionTypes.RUNNING_TOTAL:

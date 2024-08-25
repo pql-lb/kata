@@ -37,7 +37,10 @@ export const CalculateTotal = (callback: (isComplete: boolean) => void) => {
             });
 
             dispatch({ type: actionTypes.REPLACE_CART, payload: updatedCart });
-            dispatch({ type: actionTypes.FINAL_TOTAL, payload: updatedCart });
+            // dispatch({
+            //     type: actionTypes.FINAL_TOTAL,
+            //     payload: { cart: updatedCart, boolean: true },
+            // });
 
             callback(false);
         }
