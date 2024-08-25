@@ -28,7 +28,6 @@ const CartComponent = React.memo(({}: {}) => {
 
     useEffect(() => {
         startTransition(() => {
-            console.log("ere", isCheckoutPage);
             dispatch({ type: actionTypes.RUNNING_TOTAL, payload: false });
             if (isCheckoutPage) {
                 dispatch({
