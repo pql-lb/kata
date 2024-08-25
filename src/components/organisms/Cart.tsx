@@ -28,9 +28,9 @@ const CartComponent = React.memo(({}: {}) => {
 
     useEffect(() => {
         startTransition(() => {
-            dispatch({ type: actionTypes.RUNNING_TOTAL, payload: "" });
+            dispatch({ type: actionTypes.RUNNING_TOTAL, payload: false });
             if (isCheckoutPage) {
-                dispatch({ type: actionTypes.FINAL_TOTAL, payload: cart });
+                dispatch({ type: actionTypes.FINAL_TOTAL, payload: true });
             }
         });
     }, [cart, dispatch]);

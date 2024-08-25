@@ -8,13 +8,15 @@ import { PriceDisplay } from "../molecules/PriceDisplay";
 export const FinalTotal = React.memo(() => {
     const navigate = useNavigate();
     const { final } = useContext(Context);
-    CalculateTotal();
+    const [loading, setLoading] = useState(true);
+
+    CalculateTotal(setLoading);
     useEffect(() => {
         //when final has value redirect to checkout
-        if (final !== undefined) {
+        if (final !== undefined && !loading) {
             navigate("/checkout-page", { state: { final } });
         }
-    }, [final, navigate]);
+    }, [final, navigate, loading]);
 
     return <></>;
 });

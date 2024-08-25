@@ -8,13 +8,14 @@ import {
 import { Structure } from "../types/main";
 import { FetchData } from "./FetchData";
 
-export const CalculateTotal = () => {
-    const { total, final, cart } = useContext(Context);
+//Updates cart with newly fetched data
+export const CalculateTotal = (callback: (isComplete: boolean) => void) => {
+    const { cart } = useContext(Context);
     const dispatch = useContext(DispatchContext) as Dispatch<Action>;
     const { data } = FetchData(Date.now());
 
     useEffect(() => {
-        if (data) {
+        if (data && data.length) {
             const updatedPrices: Record<string, Structure> = {};
             data.forEach((item: Structure) => {
                 updatedPrices[item.id] = item;
@@ -34,7 +35,8 @@ export const CalculateTotal = () => {
 
             dispatch({ type: actionTypes.REPLACE_CART, payload: updatedCart });
             dispatch({ type: actionTypes.FINAL_TOTAL, payload: updatedCart });
+
+            callback(false);
         }
     }, [data]);
-    return data;
 };

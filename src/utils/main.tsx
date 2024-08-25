@@ -1,11 +1,12 @@
 import { Cart, PricingRules } from "../types/main";
 
-export const calculateTotal = (cart: Cart[]): any => {
+//calculates final or running total
+export const calculateTotal = (cart: Cart[], useDiscounts: boolean) => {
     let total = 0;
     cart.forEach((item) => {
         const { count, unitPrice, specialPrice } = item;
 
-        if (specialPrice) {
+        if (specialPrice && useDiscounts) {
             const { quantity, price } = specialPrice;
             const discounted = Math.floor(count / specialPrice.quantity);
             const leftOver = count % quantity;
