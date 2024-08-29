@@ -17,7 +17,7 @@ export const Product = React.memo(({ product, index }: Props) => {
             dispatch({ type: actionTypes.UPDATE_CART, payload: product });
         }
     }, [dispatch]);
-    console.log(specialPrice);
+
     return (
         <>
             <div className="product">

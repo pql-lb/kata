@@ -44,6 +44,7 @@ describe("Product Component", () => {
         );
 
         fireEvent.click(screen.getByText("Add to Cart"));
+
         expect(mockDispatch).toHaveBeenCalledTimes(1);
         expect(mockDispatch).toHaveBeenCalledWith({
             type: actionTypes.UPDATE_CART,
